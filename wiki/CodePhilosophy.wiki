@@ -1,0 +1,13 @@
+# Understand how and why I write code and why I may not implement a feature you want
+
+Most, if not all, of the code I write is written for one specific purpose: to help me.  Yes, I know it sounds a bit selfish but, as Plato once stated, necessity is the mother of all invention.  However, if I realize that someone else might find my programs useful, I will release it publically and usually with an open license.  There have been a _few_ exceptions where I was not able to, but I strive to do so.
+
+My goal is *NOT* to write software that is usable universally.  In other words, the script is not written for some guy running Windows 3.1 with Internet Explorer 5.  Similiarly, I don't check to see of my programs will work under common conditions.  I check to make sure the programs will work for me.  I live by a strict "It works for me, your milage may vary" mentality.
+
+This is not to say that I won't help people who have issues with the script.  More often than not, people that have an issue or request a feature is usually something I have considered and will often coinside with what I'm already doing.  And I want to fix any bugs or vulnerabilities.  And I believe that the more people that view the code, the more people can help fix the code.
+
+I will always try my best to assist you with any issues you may have with my script.  However, understand that it may not be as much of a priority to me as it may be for you.  
+
+Remember my code is open-source and you are more than welcome to make any fixes or changes yourself.  No need to ask for permission!  
+
+I hope you find my programs as useful as I find them.
