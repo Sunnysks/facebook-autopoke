@@ -1,7 +1,5 @@
 #summary Change Log of the Facebook Autopoke Greasemonkey script.
 
-=Changelog=
-
 == 3.4 (9/14/2010)==
   * *MODIFIED:* Set debug to 0. Debug functions were left in-tact and can be activated by either URL or changing the debug variable within the script.
 
