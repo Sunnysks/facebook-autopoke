@@ -6,7 +6,7 @@
   * *MODIFIED:* Set debug to 0. Debug functions were left in-tact and can be activated by either URL or changing the debug variable within the script.
 
 == 3.3 (8/5/2010) ==
-  * *ADDED:* Various DEBUGGING functions were added.  Please <a href="http://userscripts.org/topics/57119">read this thread</a> for more information.
+  * *ADDED:* Various DEBUGGING functions were added.  Please [http://userscripts.org/topics/57119 read this thread] for more information.
 
 == 3.2.1 (8/5/2010) ==
   * *MODIFIED:* The usoCheckup URL was changed.
@@ -20,13 +20,13 @@
 == 3.0 (6/18/2010) ==
   * *MAJOR VERSION CHANGE:* Poke confirmation function and poke function were rewritten from the ground up.  The functions have sufficiently changed that they no longer are similar to Lukas Fragodt's Auto-Poke and EZ-Poke.  However, since this script was inspired by them, I've still made an attribution.
   * *ADDED:* Various debugging lines were added so that users can assist in debugging the script.  To activate, either edit the script and change the debug variable value or add "autopoke_debug=<i>x</i>" where *x* is a value of 1 or greater.  The highest value the script checks for is 2.  Higher values show more detail.
-  * *ADDED:* @license metadata.  All scripts I author are licensed under the <a href="http://www.gnu.org/licenses/gpl.html">General Public License</a> 3.0.
+  * *ADDED:* @license metadata.  All scripts I author are licensed under the [http://www.gnu.org/licenses/gpl.html General Public License] 3.0.
 
 == 2.5 (5/28/2010) ==
   * *MODIFIED:* Script will wait 1.5 seconds before auto-poking begins.  This fixes the issue of the script not picking up any pokes as soon as the page loads.
 
 == 2.4.3 (4/21/2010) ==
-  * *FIXED:* Script searches for the poke back URL instead of the <a href="http://userscripts.org/topics/51157">text</a>.
+  * *FIXED:* Script searches for the poke back URL instead of the [http://userscripts.org/topics/51157 text].
 
 == 2.4.2--debug (4/12/2010 @ 1148 ET) ==
   * *UPDATE:* I apparently left out a curly bracket.  It's been fixed.  Please download again
@@ -34,8 +34,7 @@
 
 
 == 2.4.1 (3/3/2010) ==
-  * Added two includes: http*://*.facebook.com/?* and http*://*.facebook.com/#*<br>
-This should allow the script to run on the main page.  If you're still having problems, please submit an <a href="/topics/47098">@include request</a> and I'll add it to the next release.
+  * Added two includes: `http*://*.facebook.com/?*` and `http*://*.facebook.com/#*`  This should allow the script to run on the main page.  If you're still having problems, please submit an [http://userscripts.org/topics/47098 @include request] and I'll add it to the next release.
 
 
 == 2.4 (2/26/2010) ==
@@ -60,4 +59,3 @@ This should allow the script to run on the main page.  If you're still having pr
   * Fixed poking for facebook's new code:
     * Retreives post_form_id from the confirmation page and then passes it along to the POST function in the script.
   * Provided more descriptive errors with error codes.  Anytime the script fails, autopoke will provide a failure code in brackets.  The full-text of the failure is noted in the JavaScript console.  Provide this information when submitting bug reports.
-
