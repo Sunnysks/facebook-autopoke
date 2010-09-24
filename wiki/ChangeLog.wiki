@@ -38,18 +38,17 @@
 
 
 == 2.4 (2/26/2010) ==
-  * Copied <a href="/users/TaggedWink">TaggWink</a>'s
-<a href="/topics/47048#posts-224143">suggestion.</a>
-  * *UPDATED:* Script includes.  Script will now run on HTTPS.  The script <i>should</i> run on facebook's main page.  If it doesn't, please submit an <a href="/topics/47098">@include request</a> and I'll add it to the next release.
-  * *ADDED:* Script will now be updated via <a href="/groups/90">usoCheckup Automatic Script Updater</a>.
+  * Copied [http://userscripts.org/users/TaggedWink TaggWink's] [http://userscripts.org/topics/47048#posts-224143 suggestion].
+  * *UPDATED:* Script includes.  Script will now run on HTTPS.  The script <i>should</i> run on facebook's main page.  If it doesn't, please submit an http://userscripts.org/topics/47098 @include request] and I'll add it to the next release.
+  * *ADDED:* Script will now be updated via [http://userscripts.org/groups/90 usoCheckup Automatic Script Updater].
 
 == 2.3 (2/24/2010) ==
-  * Copied <a href="/users/133364">the-ownage</a>'s
-<a href="http://userscripts.org/topics/34806#posts-221902">suggestion.</a>  &nbsp;*VERIFIED to work on the February 2010 re-design.*
+  * Copied [http://userscripts.org/users/133364 the-ownage]'s
+[http://userscripts.org/topics/34806#posts-221902 suggestion.] *VERIFIED to work on the February 2010 re-design.*
 
 == 2.2 (2/17/2010) ==
-  * Copied <a href="http://userscripts.org/users/44197">calibius</a>'s
-<a href="http://userscripts.org/topics/34806#posts-167440">suggestion.</a>  &nbsp;*VERIFIED to work on the February 2010 re-design.*
+  * Copied [http://userscripts.org/users/44197 calibius]'s
+[http://userscripts.org/topics/34806#posts-167440 suggestion.]  &nbsp;*VERIFIED to work on the February 2010 re-design.*
 
 == 2.1 (10/19/2006) ==
   * Modified regular expression for post_form_id to better capture the confirmation code.
