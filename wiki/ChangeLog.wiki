@@ -43,12 +43,10 @@
   * *ADDED:* Script will now be updated via [http://userscripts.org/groups/90 usoCheckup Automatic Script Updater].
 
 == 2.3 (2/24/2010) ==
-  * Copied [http://userscripts.org/users/133364 the-ownage]'s
-[http://userscripts.org/topics/34806#posts-221902 suggestion.] *VERIFIED to work on the February 2010 re-design.*
+  * Copied [http://userscripts.org/users/133364 the-ownage]'s [http://userscripts.org/topics/34806#posts-221902 suggestion.] *VERIFIED to work on the February 2010 re-design.*
 
 == 2.2 (2/17/2010) ==
-  * Copied [http://userscripts.org/users/44197 calibius's] 
-[http://userscripts.org/topics/34806#posts-167440 suggestion.]  &nbsp;*VERIFIED to work on the February 2010 re-design.*
+  * Copied [http://userscripts.org/users/44197 calibius's] [http://userscripts.org/topics/34806#posts-167440 suggestion.]  &nbsp;*VERIFIED to work on the February 2010 re-design.*
 
 == 2.1 (10/19/2006) ==
   * Modified regular expression for post_form_id to better capture the confirmation code.
