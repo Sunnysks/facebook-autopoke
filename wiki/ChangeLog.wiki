@@ -47,7 +47,7 @@
 [http://userscripts.org/topics/34806#posts-221902 suggestion.] *VERIFIED to work on the February 2010 re-design.*
 
 == 2.2 (2/17/2010) ==
-  * Copied [http://userscripts.org/users/44197 calibius]'s
+  * Copied [http://userscripts.org/users/44197 calibius's] 
 [http://userscripts.org/topics/34806#posts-167440 suggestion.]  &nbsp;*VERIFIED to work on the February 2010 re-design.*
 
 == 2.1 (10/19/2006) ==
