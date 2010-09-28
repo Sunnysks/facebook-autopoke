@@ -3,7 +3,7 @@
 // @author      Michael Soh 
 // @namespace   autopoke_5200 
 // @description Automatically pokes back people listed on your home page. This script was inspired by Lukas Fragodt's Auto-Poke and EZ-Poke. 
-// @version     3.4 (14 Sept 2010)
+// @version     3.5
 // @license     GPL 3.0 
 // @include     http*://facebook.com/home.php* 
 // @include     http*://*.facebook.com/home.php* 
@@ -23,7 +23,7 @@ var subDomain = '';
 if (subDomainRegExp.exec(document.location) != 0) 
      subDomain = RegExp.$1; 
  
-var debug_url = /&autopoke_debug=(\d+)/; 
+var debug_url = /autopoke_debug=(\d+)/; 
 if ((debug_url.exec(document.location) != 0) && (RegExp.$1 > debug)) { 
      debug = RegExp.$1; 
       
@@ -51,6 +51,7 @@ if (debug > 0) FB_log('Current Location: ' + document.location);
 setTimeout(init, wait); 
  
 // =-=-=-=-=- FUNCTIONS -=-=-=-=-= // 
+
 function init() { 
      var html_tag = evaluate_xpath('.//html'); 
      var fb_lang = html_tag.snapshotItem(0).getAttribute('lang'); 
