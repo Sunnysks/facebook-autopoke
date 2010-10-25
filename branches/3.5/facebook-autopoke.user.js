@@ -1,9 +1,9 @@
 // ==UserScript== 
 // @name        Facebook Autopoke 
 // @author      Michael Soh 
-// @namespace   autopoke_5200 
+// @namespace   autopoke_5200__DEBUG
 // @description Automatically pokes back people listed on your home page. This script was inspired by Lukas Fragodt's Auto-Poke and EZ-Poke. 
-// @version     3.5
+// @version     3.5-1
 // @license     GPL 3.0 
 // @include     http*://facebook.com/home.php* 
 // @include     http*://*.facebook.com/home.php* 
@@ -15,7 +15,7 @@
 // 
 // ==/UserScript== 
  
-var debug = 0;
+var debug = 5;
 var retries = 40; 
 var wait = 1500; // 1.5 seconds 
 var subDomainRegExp = /http[s]?:\/\/(.*\.)facebook\.com/; 
