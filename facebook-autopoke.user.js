@@ -16,7 +16,7 @@
 // ==/UserScript== 
  
 var debug = 5;
-var retries = 40; 
+var retries = 3; 
 var wait = 1500; // 1.5 seconds 
 var subDomainRegExp = /http[s]?:\/\/(.*\.)facebook\.com/; 
 var subDomain = ''; 
@@ -80,7 +80,7 @@ function toggle_fb_log() {
  
 function find_pokes() { 
      // Retrieve poke links via XPath 
-     var anchors = evaluate_xpath('.//a[@id[starts-with(.,"poke")]]'); 
+     var anchors = evaluate_xpath('.//*[@id[starts-with(.,"poke")]]'); 
  
      if (anchors.snapshotLength > 0) { 
           if (debug > 0) FB_log('Poke back links found: ' + anchors.snapshotLength) 
