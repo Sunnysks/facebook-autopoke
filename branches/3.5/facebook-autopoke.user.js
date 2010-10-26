@@ -57,13 +57,13 @@ function init() {
      var fb_lang = html_tag.snapshotItem(0).getAttribute('lang'); 
  
      if (debug > 0) { 
-          var poke_div = evaluate_xpath('.//h4[contains(.,"Pokes")]'); 
- 
+          var poke_div = evaluate_xpath('.//div[@id[starts-with(.,"Pokes")]]'); 
           if (poke_div.snapshotLength == 1) { 
-               poke_div.snapshotItem(0).innerHTML += ' <a href="#" id="auto_poke">Auto-poke</a>'; 
-               evaluate_xpath('.//a[@id="auto_poke"]').snapshotItem(0).addEventListener('click', find_pokes, true); 
+	       var links = document.evaluate(".//a", poke_div.snapshotItem(0), null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+
+//	        poke_div.snapshotItem(0).innerHTML += ' <a href="#" id="auto_poke">Auto-poke</a>'; 
+//              evaluate_xpath('.//a[@id="auto_poke"]').snapshotItem(0).addEventListener('click', find_pokes, true); 
           } 
- 
      } 
  
      find_pokes(); 
@@ -80,8 +80,14 @@ function toggle_fb_log() {
  
 function find_pokes() { 
      // Retrieve poke links via XPath 
-     var anchors = evaluate_xpath('.//*[@id[starts-with(.,"poke")]]'); 
- 
+     var anchors = evaluate_xpath('.//div[@id[starts-with(.,"Pokes")]]');
+
+     if (anchors.snapshotLength > 0) {
+	  var links = document.evaluate(".//a", anchors.snapshotItem(0).innerHTML, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+	  FM_log(links.snapshotItem(0).innerHTML);
+     }
+
+	  /*
      if (anchors.snapshotLength > 0) { 
           if (debug > 0) FB_log('Poke back links found: ' + anchors.snapshotLength) 
           var pokeRegExp = /id=(\d*)/; 
@@ -94,7 +100,7 @@ function find_pokes() {
           FB_log('No pokes found. Retries left: ' + retries); 
           if (retries > 0)           
                setTimeout(find_pokes, wait); 
-     } 
+     } */
 } 
  
  
