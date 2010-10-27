@@ -81,14 +81,12 @@ function find_pokes() {
      // Retrieve poke links via XPath 
      var anchors = evaluate_xpath('.//div[@id[starts-with(.,"poke")]]/div/a[contains(.,"Poke Back")]');
 
-     if (anchors.snapshotLength > 0) { 
+     for (var i = 0; anchors.snapshotLength > 0; i++) { 
           if (debug > 0) FB_log('Poke back links found: ' + anchors.snapshotLength) 
-          var pokeRegExp = /id=(\d*)/; 
-          for (var i = 0; i < anchors.snapshotLength; i++) { 
-               pokeRegExp.exec(anchors.snapshotItem(i).href); 
-               poke_function(anchors.snapshotItem(i).href, anchors.snapshotItem(i)); 
-          } 
-     } else { 
+	  poke_function(anchors.snapshotItem(i).getAttribute('ajaxify'), anchors.snapshotItem(i)); 
+     }
+
+     if (anchors.snapshotLength == 0) {
           retries--; 
           FB_log('No pokes found. Retries left: ' + retries); 
           if (retries > 0)           
@@ -136,7 +134,7 @@ function execute_poke(poke_uid, poke_node) {
      FB_log('cookie: ' + document.cookie); 
      var post_form_id = evaluate_xpath('.//*[@id="post_form_id"]').snapshotItem(0).value; 
      var fb_dtsg = evaluate_xpath('.//*[@name="fb_dtsg"]').snapshotItem(0).value; 
-     var post_data = 'uid=' + poke_uid + '&pokeback=1&post_form_id=' + post_form_id + '&fb_dtsg=' + fb_dtsg + '&post_form_id_source=AsyncRequest'; 
+     var post_data = "nctr[_mod]=pagelet_netego_pokes&postform_id=" + post_form_id + '&fn_dtsg=' + fb_dtsg + '&lsd&post_form_id_source=AsyncRequest';
  
      poke_node.innerHTML = 'Executing autopoke (' + poke_uid + ')...'; 
      if (debug > 0) FB_log('post_data: ' + post_data); 
