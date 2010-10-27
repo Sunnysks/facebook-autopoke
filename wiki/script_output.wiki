@@ -1,3 +1,5 @@
+﻿#summary output of the new facebook interface
+
 {{{
 <script>
 window._is_quickling_index="";
