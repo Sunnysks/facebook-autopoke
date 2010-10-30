@@ -92,7 +92,7 @@ function find_pokes() {
 	  p_regexp.exec(ajax_ref);
 	  var post_data = "p=" + RegExp.$1;
 
-	  ajax_ref = ajax_ref(/\?.*/, '');
+	  ajax_ref = ajax_ref.replace(/\?.*/, '');
 	  ajax_ref = ajax_ref + "?__a=1";
 
 	  post_data = post_data + "&nctr[_mod]=pagelet_netego_pokes&post_form_id=" + post_form_id + '&fb_dtsg=' + fb_dtsg + '&lsd&post_form_id_source=AsyncRequest';
