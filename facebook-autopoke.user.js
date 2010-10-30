@@ -120,7 +120,7 @@ function poke_function(poke_link, poke_node, poke_post_data) {
 	       'Referer':document.location,
 	       'Cookie':document.cookie,
 	  },
-	  data:post_data,
+	  data:poke_post_data,
           onload: function(response) { 
                if (response.status == 200) { 
                     if (response.responseText.indexOf('You are about to poke') != -1) { 
