@@ -3,7 +3,7 @@
 // @author      Michael Soh 
 // @namespace   autopoke_5200 
 // @description Automatically pokes back people listed on your home page. This script was inspired by Lukas Fragodt's Auto-Poke and EZ-Poke. 
-// @version     3.5--BETA
+// @version     3.5 (30 Oct 2010)
 // @license     GPL 3.0 
 // @include     http*://facebook.com/home.php* 
 // @include     http*://*.facebook.com/home.php* 
@@ -15,13 +15,9 @@
 // 
 // ==/UserScript== 
  
-var debug = 5;
+var debug = 0;
 var retries = 3; 
 var wait = 1500; // 1.5 seconds 
-var subDomainRegExp = /http[s]?:\/\/(.*\.)facebook\.com/; 
-var subDomain = ''; 
-if (subDomainRegExp.exec(document.location) != 0) 
-     subDomain = RegExp.$1; 
  
 var debug_url = /&autopoke_debug=(\d+)/; 
 if ((debug_url.exec(document.location) != 0) && (RegExp.$1 > debug)) { 
@@ -40,7 +36,7 @@ if (debug > 2) {
 	     '<p><a id="close_fb_log">Close</a></p>' +
 	     '<textarea style="width: 590px; height: 225px;" id="fb_log" nowrap readonly>' +  
 	     '</textarea>' +
-	     '<input type="submit" value="Submit for debugging" /></div>'; 
+	     '</div>'; 
 
      document.body.insertBefore(my_div, document.body.firstChild);
      document.getElementById('close_fb_log').addEventListener("click", toggle_fb_log, true);
