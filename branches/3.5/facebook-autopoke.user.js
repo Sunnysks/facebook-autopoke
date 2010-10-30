@@ -111,6 +111,7 @@ function find_pokes() {
  
 function poke_function(poke_link, poke_node, poke_post_data) { 
      if (debug > 0) FB_log("Retrieving confirmation page(" + poke_link + ")"); 
+     if (debug > 1) FB_log("POST data: " + poke_post_data);
  
      GM_xmlhttpRequest({ 
           method:'POST', 
