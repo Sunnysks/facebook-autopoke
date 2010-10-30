@@ -94,7 +94,7 @@ function find_pokes() {
 	  var post_data = "p=" + RegExp.$1;
 
 	  var poke_uid_regexp = /poke_(\d+)/;
-	  poke_uid_regexp(poke_divs.snapshotItem(i).getAttribute('id'));
+	  poke_uid_regexp.exec(poke_divs.snapshotItem(i).getAttribute('id'));
 	  var poke_uid = RegExp.$1;
 
 	  ajax_ref = ajax_ref.replace(/\?.*/, '');
