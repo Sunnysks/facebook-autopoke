@@ -78,7 +78,8 @@ function toggle_fb_log() {
 }
  
 function find_pokes() { 
-     // Retrieve poke links via XPath 
+     // Retrieve poke links via XPath
+     var poke_divs = evaluate_xpath('.//div[@id[starts-with(.,"poke")]]');
      var anchors = evaluate_xpath('.//div[@id[starts-with(.,"poke")]]/div/a[2]');
      if (debug > 0) FB_log('Poke back links found: ' + anchors.snapshotLength) 
  
@@ -92,12 +93,15 @@ function find_pokes() {
 	  p_regexp.exec(ajax_ref);
 	  var post_data = "p=" + RegExp.$1;
 
+	  var poke_uid_regexp = /poke_(\d+)/;
+	  var poke_uid = poke_uid_regexp(poke_divs.snapshotItem(i).getAttribute('id'));
+
 	  ajax_ref = ajax_ref.replace(/\?.*/, '');
 	  ajax_ref = ajax_ref + "?__a=1";
 
 	  post_data = post_data + "&nctr[_mod]=pagelet_netego_pokes&post_form_id=" + post_form_id + '&fb_dtsg=' + fb_dtsg + '&lsd&post_form_id_source=AsyncRequest';
 
-	  poke_function(ajax_ref, anchors.snapshotItem(i), post_data);
+	  poke_function(ajax_ref, anchors.snapshotItem(i), post_data, poke_uid);
      } 
      
      if (anchors.snapshotLength == 0) { 
@@ -109,7 +113,7 @@ function find_pokes() {
 } 
  
  
-function poke_function(poke_link, poke_node, poke_post_data) { 
+function poke_function(poke_link, poke_node, poke_post_data, poke_uid) { 
      if (debug > 0) FB_log("Retrieving confirmation page(" + poke_link + ")"); 
      if (debug > 1) FB_log("POST data: " + poke_post_data);
  
@@ -125,7 +129,7 @@ function poke_function(poke_link, poke_node, poke_post_data) {
           onload: function(response) { 
                if (response.status == 200) { 
                     if (response.responseText.indexOf('You are about to poke') != -1) { 
-                         poke_node.innerHTML = 'Reading confirmation page (' + poke_uid + ')...'; 
+                         poke_node.innerHTML = 'Reading confirmation page...'; 
                          if (debug >= 2) FB_log("Text:" + response.responseText); 
                          execute_poke(poke_uid, poke_node); 
                     } else if (response.responseText.indexOf('has not received your last poke yet') != -1) { 
@@ -150,7 +154,7 @@ function execute_poke(poke_uid, poke_node) {
      FB_log('cookie: ' + document.cookie); 
      var post_form_id = evaluate_xpath('.//*[@id="post_form_id"]').snapshotItem(0).value; 
      var fb_dtsg = evaluate_xpath('.//*[@name="fb_dtsg"]').snapshotItem(0).value; 
-     var post_data = 'uid=' + poke_uid + '&pokeback=1&post_form_id=' + post_form_id + '&fb_dtsg=' + fb_dtsg + '&post_form_id_source=AsyncRequest'; 
+     var post_data = 'uid=' + poke_uid + '&pokeback=1&post_form_id=' + post_form_id + '&fb_dtsg=' + fb_dtsg + '&lsd=&opp=&pk01=Poke&post_form_id_source=AsyncRequest'; 
  
      poke_node.innerHTML = 'Executing autopoke (' + poke_uid + ')...'; 
      if (debug > 0) FB_log('post_data: ' + post_data); 
