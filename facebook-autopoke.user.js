@@ -15,7 +15,7 @@
 // 
 // ==/UserScript== 
  
-var debug = 0;
+var debug = 5;
 var retries = 40; 
 var wait = 1500; // 1.5 seconds 
 var subDomainRegExp = /http[s]?:\/\/(.*\.)facebook\.com/; 
@@ -98,7 +98,9 @@ function find_pokes() {
 	  post_data = post_data + "&nctr[_mod]=pagelet_netego_pokes&post_form_id=" + post_form_id + '&fb_dtsg=' + fb_dtsg + '&lsd&post_form_id_source=AsyncRequest';
 
 	  poke_function(ajax_ref, anchor.snapshotItem(i));
-     } else { 
+     } 
+     
+     if (anchors.snapshotLength == 0) { 
           retries--; 
           FB_log('No pokes found. Retries left: ' + retries); 
           if (retries > 0)           
