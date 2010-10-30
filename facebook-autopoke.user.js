@@ -16,7 +16,7 @@
 // ==/UserScript== 
  
 var debug = 5;
-var retries = 40; 
+var retries = 3; 
 var wait = 1500; // 1.5 seconds 
 var subDomainRegExp = /http[s]?:\/\/(.*\.)facebook\.com/; 
 var subDomain = ''; 
@@ -94,7 +94,8 @@ function find_pokes() {
 	  var post_data = "p=" + RegExp.$1;
 
 	  var poke_uid_regexp = /poke_(\d+)/;
-	  var poke_uid = poke_uid_regexp(poke_divs.snapshotItem(i).getAttribute('id'));
+	  poke_uid_regexp(poke_divs.snapshotItem(i).getAttribute('id'));
+	  var poke_uid = RegExp.$1;
 
 	  ajax_ref = ajax_ref.replace(/\?.*/, '');
 	  ajax_ref = ajax_ref + "?__a=1";
@@ -162,7 +163,7 @@ function execute_poke(poke_uid, poke_node) {
      //Submit the poke. 
      GM_xmlhttpRequest({ 
           method:'POST', 
-          url:'http://' + subDomain + 'facebook.com/ajax/poke.php?__a=1', 
+          url:'/ajax/poke.php?__a=1', 
           headers:{ 
                'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8', 
                'Referer':document.location, 
