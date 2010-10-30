@@ -3,7 +3,7 @@
 // @author      Michael Soh 
 // @namespace   autopoke_5200 
 // @description Automatically pokes back people listed on your home page. This script was inspired by Lukas Fragodt's Auto-Poke and EZ-Poke. 
-// @version     3.4 (14 Sept 2010)
+// @version     3.5--BETA
 // @license     GPL 3.0 
 // @include     http*://facebook.com/home.php* 
 // @include     http*://*.facebook.com/home.php* 
@@ -79,15 +79,25 @@ function toggle_fb_log() {
  
 function find_pokes() { 
      // Retrieve poke links via XPath 
-     var anchors = evaluate_xpath('.//a[@id[starts-with(.,"poke")]]'); 
+     var anchors = evaluate_xpath('.//div[@id[starts-with(.,"poke")]]/div/a[2]');
+     if (debug > 0) FB_log('Poke back links found: ' + anchors.snapshotLength) 
  
-     if (anchors.snapshotLength > 0) { 
-          if (debug > 0) FB_log('Poke back links found: ' + anchors.snapshotLength) 
-          var pokeRegExp = /id=(\d*)/; 
-          for (var i = 0; i < anchors.snapshotLength; i++) { 
-               pokeRegExp.exec(anchors.snapshotItem(i).href); 
-               poke_function(anchors.snapshotItem(i).href, anchors.snapshotItem(i)); 
-          } 
+     for (var i=0; i < anchors.snapshotLength; i++) {
+	  var ajax_ref = anchors.snapshotItem(i).getAttribute('ajaxify');
+	  FB_log(i + ":" + ajax_ref);
+
+	  var post_form_id = evaluate_xpath('.//*[@id="post_form_id"]').snapshotItem(0).value;
+	  var fb_dtsg = evaluate_xpath('.//*[@name="fb_dtsg"]').snapshotItem(0).value;
+          var p_regexp = /p=(.*)/;
+	  p_regexp.exec(ajax_ref);
+	  var post_data = "p=" + RegExp.$1;
+
+	  ajax_ref = ajax_ref(/\?.*/, '');
+	  ajax_ref = ajax_ref + "?__a=1";
+
+	  post_data = post_data + "&nctr[_mod]=pagelet_netego_pokes&post_form_id=" + post_form_id + '&fb_dtsg=' + fb_dtsg + '&lsd&post_form_id_source=AsyncRequest';
+
+	  poke_function(ajax_ref, anchor.snapshotItem(i));
      } else { 
           retries--; 
           FB_log('No pokes found. Retries left: ' + retries); 
@@ -97,17 +107,18 @@ function find_pokes() {
 } 
  
  
-function poke_function(poke_link, poke_node) { 
-     var uid_match = /uid=(\d+)&can_poke=(\d+)/; 
-     uid_match.exec(poke_link); 
-     var poke_uid = RegExp.$1; 
- 
-     poke_link += "&__a=1&__d=1"; 
+function poke_function(poke_link, poke_node, poke_post_data) { 
      if (debug > 0) FB_log("Retrieving confirmation page(" + poke_link + ")"); 
  
      GM_xmlhttpRequest({ 
-          method:'GET', 
+          method:'POST', 
           url:poke_link, 
+	  headers:{
+	       'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8',
+	       'Referer':document.location,
+	       'Cookie':document.cookie,
+	  },
+	  data:post_data,
           onload: function(response) { 
                if (response.status == 200) { 
                     if (response.responseText.indexOf('You are about to poke') != -1) { 
