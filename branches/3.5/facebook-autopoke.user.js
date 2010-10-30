@@ -97,7 +97,7 @@ function find_pokes() {
 
 	  post_data = post_data + "&nctr[_mod]=pagelet_netego_pokes&post_form_id=" + post_form_id + '&fb_dtsg=' + fb_dtsg + '&lsd&post_form_id_source=AsyncRequest';
 
-	  poke_function(ajax_ref, anchors.snapshotItem(i));
+	  poke_function(ajax_ref, anchors.snapshotItem(i), post_data);
      } 
      
      if (anchors.snapshotLength == 0) { 
