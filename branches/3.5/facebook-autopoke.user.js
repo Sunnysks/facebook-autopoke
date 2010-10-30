@@ -1,9 +1,9 @@
 // ==UserScript== 
 // @name        Facebook Autopoke 
 // @author      Michael Soh 
-// @namespace   autopoke_5200__DEBUG
+// @namespace   autopoke_5200 
 // @description Automatically pokes back people listed on your home page. This script was inspired by Lukas Fragodt's Auto-Poke and EZ-Poke. 
-// @version     3.5-1
+// @version     3.4 (14 Sept 2010)
 // @license     GPL 3.0 
 // @include     http*://facebook.com/home.php* 
 // @include     http*://*.facebook.com/home.php* 
@@ -15,15 +15,15 @@
 // 
 // ==/UserScript== 
  
-var debug = 5;
-var retries = 3; 
+var debug = 0;
+var retries = 40; 
 var wait = 1500; // 1.5 seconds 
 var subDomainRegExp = /http[s]?:\/\/(.*\.)facebook\.com/; 
 var subDomain = ''; 
 if (subDomainRegExp.exec(document.location) != 0) 
      subDomain = RegExp.$1; 
  
-var debug_url = /autopoke_debug=(\d+)/; 
+var debug_url = /&autopoke_debug=(\d+)/; 
 if ((debug_url.exec(document.location) != 0) && (RegExp.$1 > debug)) { 
      debug = RegExp.$1; 
       
@@ -51,18 +51,18 @@ if (debug > 0) FB_log('Current Location: ' + document.location);
 setTimeout(init, wait); 
  
 // =-=-=-=-=- FUNCTIONS -=-=-=-=-= // 
-
 function init() { 
      var html_tag = evaluate_xpath('.//html'); 
      var fb_lang = html_tag.snapshotItem(0).getAttribute('lang'); 
  
      if (debug > 0) { 
-          var poke_div = evaluate_xpath('.//div[@id[starts-with(.,"poke")]]/div/a[contains(.,"Poke Back")]'); 
-
+          var poke_div = evaluate_xpath('.//h4[contains(.,"Pokes")]'); 
+ 
           if (poke_div.snapshotLength == 1) { 
-	       poke_div.snapshotItem(0).innerHTML += ' <a href="#" id="auto_poke">Auto-poke</a>'; 
-	       evaluate_xpath('.//a[@id="auto_poke"]').snapshotItem(0).addEventListener('click', find_pokes, true); 
+               poke_div.snapshotItem(0).innerHTML += ' <a href="#" id="auto_poke">Auto-poke</a>'; 
+               evaluate_xpath('.//a[@id="auto_poke"]').snapshotItem(0).addEventListener('click', find_pokes, true); 
           } 
+ 
      } 
  
      find_pokes(); 
@@ -79,19 +79,21 @@ function toggle_fb_log() {
  
 function find_pokes() { 
      // Retrieve poke links via XPath 
-     var anchors = evaluate_xpath('.//div[@id[starts-with(.,"poke")]]/div/a[contains(.,"Poke Back")]');
-
-     for (var i = 0; anchors.snapshotLength > 0; i++) { 
+     var anchors = evaluate_xpath('.//a[@id[starts-with(.,"poke")]]'); 
+ 
+     if (anchors.snapshotLength > 0) { 
           if (debug > 0) FB_log('Poke back links found: ' + anchors.snapshotLength) 
-	  poke_function(anchors.snapshotItem(i).getAttribute('ajaxify'), anchors.snapshotItem(i)); 
-     }
-
-     if (anchors.snapshotLength == 0) {
+          var pokeRegExp = /id=(\d*)/; 
+          for (var i = 0; i < anchors.snapshotLength; i++) { 
+               pokeRegExp.exec(anchors.snapshotItem(i).href); 
+               poke_function(anchors.snapshotItem(i).href, anchors.snapshotItem(i)); 
+          } 
+     } else { 
           retries--; 
           FB_log('No pokes found. Retries left: ' + retries); 
           if (retries > 0)           
                setTimeout(find_pokes, wait); 
-     }
+     } 
 } 
  
  
@@ -134,7 +136,7 @@ function execute_poke(poke_uid, poke_node) {
      FB_log('cookie: ' + document.cookie); 
      var post_form_id = evaluate_xpath('.//*[@id="post_form_id"]').snapshotItem(0).value; 
      var fb_dtsg = evaluate_xpath('.//*[@name="fb_dtsg"]').snapshotItem(0).value; 
-     var post_data = "nctr[_mod]=pagelet_netego_pokes&postform_id=" + post_form_id + '&fn_dtsg=' + fb_dtsg + '&lsd&post_form_id_source=AsyncRequest';
+     var post_data = 'uid=' + poke_uid + '&pokeback=1&post_form_id=' + post_form_id + '&fb_dtsg=' + fb_dtsg + '&post_form_id_source=AsyncRequest'; 
  
      poke_node.innerHTML = 'Executing autopoke (' + poke_uid + ')...'; 
      if (debug > 0) FB_log('post_data: ' + post_data); 
